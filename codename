@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+import random
+from pathlib import Path
+
+
+JOIN_WITH = "-"
+
+# Use .resolve() to compensate for symbolic links
+# and be sure this resolves to this file's actual
+# directory
+PROJECT_DIR = Path(__file__).resolve().parent
+
+
+with open(PROJECT_DIR / "adjectives") as f:
+    adjectives = f.readlines()
+
+with open(PROJECT_DIR / "nouns") as f:
+    nouns = f.readlines()
+
+def clean(word):
+    return word.replace("\n", "").strip()
+
+adjective = clean(random.choice(adjectives))
+noun = clean(random.choice(nouns))
+
+print(JOIN_WITH.join([adjective, noun]))
